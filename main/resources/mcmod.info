@@ -1,0 +1,16 @@
+[
+{
+  "modid": "fillycam",
+  "name": "FillyCam",
+  "description": "The mod that allows you to change the camera height and distance for more immersion!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Hepolite"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
