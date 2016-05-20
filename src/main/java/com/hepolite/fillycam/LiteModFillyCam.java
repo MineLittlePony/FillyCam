@@ -16,7 +16,6 @@ public class LiteModFillyCam implements Tickable
 	private static LiteModFillyCam instance;
 
 	private KeyBinding keyGui = new KeyBinding("Opens the FillyCam GUI", 66, "FillyCam");
-	private Config config;
 
 	@Override
 	public String getName()
@@ -35,22 +34,18 @@ public class LiteModFillyCam implements Tickable
 		return instance;
 	}
 
-	public Config getConfig()
-	{
-		return config;
-	}
-
 	@Override
 	public void init(File configPath)
 	{
 		instance = this;
-		LiteLoader.getInstance().registerExposable(config = new Config(), null);
+		LiteLoader.getInstance().registerExposable(Config.INSTANCE, null);
 		LiteLoader.getInput().registerKeyBinding(this.keyGui);
 	}
 
 	@Override
 	public void onTick(Minecraft mc, float partialTicks, boolean inGame, boolean clock)
 	{
+		Config config = Config.INSTANCE;
 		if (this.keyGui.isPressed())
 		{
 			mc.displayGuiScreen(new GuiScreenFillyCam());

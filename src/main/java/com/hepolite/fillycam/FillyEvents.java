@@ -11,7 +11,7 @@ public class FillyEvents
 	public static void changeEyeHeight(ReturnEventInfo<EntityPlayer, Float> e)
 	{
 
-		Config config = LiteModFillyCam.getInstance().getConfig();
+		Config config = Config.INSTANCE;
 		if (!config.getBoolean(Setting.MOD_ENABLED) || e.getSource().isPlayerSleeping())
 		{
 			return;

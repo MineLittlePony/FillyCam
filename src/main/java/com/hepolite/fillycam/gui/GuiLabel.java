@@ -15,7 +15,7 @@ public class GuiLabel extends GuiElement
 	{
 		super(x, y, width, height);
 		this.name = name;
-		this.color = (int) colorBlue + 256 * ((int) colorGreen + 256 * (int) colorRed);
+		this.color = colorBlue + 256 * (colorGreen + 256 * colorRed);
 	}
 
 	@Override

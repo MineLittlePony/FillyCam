@@ -3,16 +3,18 @@ package com.hepolite.fillycam.gui;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
-
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.GL11;
 
 import com.hepolite.fillycam.Config;
 import com.hepolite.fillycam.Config.Setting;
 import com.hepolite.fillycam.gui.GuiButton.GuiButtonCheckbox;
 import com.hepolite.fillycam.gui.GuiButton.GuiButtonRadiobox;
+
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
 public class GuiScreenFillyCam extends GuiScreen
 {
@@ -70,7 +72,7 @@ public class GuiScreenFillyCam extends GuiScreen
 		buttonEnableMod = new GuiButtonCheckbox(rowX + 124, y, 16, 16);
 		addElement(buttonEnableMod);
 		addElement(buttonEnableModLabel);
-		buttonEnableMod.setActive(Config.getBoolean(Setting.MOD_ENABLED));
+		buttonEnableMod.setActive(Config.INSTANCE.getBoolean(Setting.MOD_ENABLED));
 
 		scrollbarCameraHeightOffsetLabel = new GuiLabel(rowX, y + 39, 120, 16, "Camera Height", (byte) 255, (byte) 255, (byte) 255);
 		scrollbarCameraHeightOffset = new GuiScrollbar(rowX + 124, y + 30, 120, 16, 6);
@@ -80,7 +82,7 @@ public class GuiScreenFillyCam extends GuiScreen
 		addElement(scrollbarCameraHeightOffsetLabel);
 		addElement(scrollbarCameraHeightOffsetInfo);
 		addElement(scrollbarCameraHeightOffsetReset);
-		scrollbarCameraHeightOffset.setValue(Config.getFloat(Setting.CAMERA_OFFSET_HEIGHT) / 1.55f);
+		scrollbarCameraHeightOffset.setValue(Config.INSTANCE.getFloat(Setting.CAMERA_OFFSET_HEIGHT) / 1.55f);
 		scrollbarCameraHeightOffsetReset.setActive(false);
 
 		scrollbarCameraDistanceOffsetLabel = new GuiLabel(rowX, y + 77, 120, 16, "Camera Distance", (byte) 255, (byte) 255, (byte) 255);
@@ -91,7 +93,7 @@ public class GuiScreenFillyCam extends GuiScreen
 		addElement(scrollbarCameraDistanceOffsetLabel);
 		addElement(scrollbarCameraDistanceOffsetInfo);
 		addElement(scrollbarCameraDistanceOffsetReset);
-		scrollbarCameraDistanceOffset.setValue(Config.getFloat(Setting.CAMERA_OFFSET_DISTANCE) / 3.5f);
+		scrollbarCameraDistanceOffset.setValue(Config.INSTANCE.getFloat(Setting.CAMERA_OFFSET_DISTANCE) / 3.5f);
 		scrollbarCameraDistanceOffsetReset.setActive(false);
 
 		buttonPresetDefault = new GuiButtonRadiobox(rowX + 124, y + 120, 16, 16);
@@ -129,7 +131,7 @@ public class GuiScreenFillyCam extends GuiScreen
 	public void onGuiClosed()
 	{
 		Keyboard.enableRepeatEvents(false);
-		Config.save();
+		Config.INSTANCE.save();
 	}
 
 	@Override
@@ -190,13 +192,13 @@ public class GuiScreenFillyCam extends GuiScreen
 		}
 
 		// Actually set the config values
-		Config.set(Setting.MOD_ENABLED, buttonEnableMod.isActive());
-		Config.set(Setting.CAMERA_OFFSET_HEIGHT, 1.55f * scrollbarCameraHeightOffset.getValue());
-		Config.set(Setting.CAMERA_OFFSET_DISTANCE, 3.5f * scrollbarCameraDistanceOffset.getValue());
+		Config.INSTANCE.set(Setting.MOD_ENABLED, buttonEnableMod.isActive());
+		Config.INSTANCE.set(Setting.CAMERA_OFFSET_HEIGHT, 1.55f * scrollbarCameraHeightOffset.getValue());
+		Config.INSTANCE.set(Setting.CAMERA_OFFSET_DISTANCE, 3.5f * scrollbarCameraDistanceOffset.getValue());
 
 		// Update visual information
-		scrollbarCameraHeightOffsetInfo.setName(String.format("Height: %.2fm", 1.62f + Config.getFloat(Setting.CAMERA_OFFSET_HEIGHT)));
-		scrollbarCameraDistanceOffsetInfo.setName(String.format("Distance: %.1fm", 4.0f + Config.getFloat(Setting.CAMERA_OFFSET_DISTANCE)));
+		scrollbarCameraHeightOffsetInfo.setName(String.format("Height: %.2fm", 1.62f + Config.INSTANCE.getFloat(Setting.CAMERA_OFFSET_HEIGHT)));
+		scrollbarCameraDistanceOffsetInfo.setName(String.format("Distance: %.1fm", 4.0f + Config.INSTANCE.getFloat(Setting.CAMERA_OFFSET_DISTANCE)));
 
 		// Detect if the custom button should be on or not
 		float h = scrollbarCameraHeightOffset.getValue();
@@ -249,12 +251,12 @@ public class GuiScreenFillyCam extends GuiScreen
 	public void renderTexturedRectangle(double x, double y, double width, double height)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
-		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-		worldrenderer.startDrawingQuads();
-		worldrenderer.addVertexWithUV(x, y + height, zLevel, 0.0, 1.0);
-		worldrenderer.addVertexWithUV(x + width, y + height, zLevel, 1.0, 1.0);
-		worldrenderer.addVertexWithUV(x + width, y, zLevel, 1.0, 0.0);
-		worldrenderer.addVertexWithUV(x, y, zLevel, 0.0, 0.0);
+		VertexBuffer buffer = tessellator.getBuffer();
+		buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+		buffer.pos(x, y + height, zLevel).tex(0.0, 1.0).endVertex();
+		buffer.pos(x + width, y + height, zLevel).tex(1.0, 1.0).endVertex();
+		buffer.pos(x + width, y, zLevel).tex(1.0, 0.0).endVertex();
+		buffer.pos(x, y, zLevel).tex(0.0, 0.0).endVertex();
 		tessellator.draw();
 	}
 }

@@ -10,8 +10,10 @@ import com.mumfrey.liteloader.modconfig.Exposable;
 import com.mumfrey.liteloader.modconfig.ExposableOptions;
 
 @ExposableOptions(filename = "fillycam")
-public class Config implements Exposable
+public enum Config implements Exposable
 {
+	INSTANCE;
+
 	// Core settings
 	public enum Setting
 	{
@@ -22,7 +24,7 @@ public class Config implements Exposable
 	@SerializedName("settings")
 	private Map<Setting, Object> settingsMap = Maps.newEnumMap(Setting.class);
 
-	public Config()
+	private Config()
 	{
 		settingsMap.put(Setting.MOD_ENABLED, true);
 		settingsMap.put(Setting.DEBUG_ENABLED, false);

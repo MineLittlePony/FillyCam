@@ -56,6 +56,6 @@ public abstract class GuiElement
 	/** Binds the given texture to the Minecraft render engine */
 	public void bindTexture(ResourceLocation resource)
 	{
-		Minecraft.getMinecraft().renderEngine.bindTexture(resource);
+		Minecraft.getMinecraft().getTextureManager().bindTexture(resource);
 	}
 }

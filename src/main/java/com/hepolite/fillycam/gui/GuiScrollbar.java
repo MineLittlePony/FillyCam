@@ -26,14 +26,14 @@ public class GuiScrollbar extends GuiElement
 		bindTexture(textureBackground);
 		parentGui.renderTexturedRectangle(x, y, width, height);
 		bindTexture(textureMarker);
-		parentGui.renderTexturedRectangle(x + 2 + (int) (0.5f * (value + 1.0f) * (float) (width - markerWidth - 2)), y + 2, markerWidth, height - 4);
+		parentGui.renderTexturedRectangle(x + 2 + (int) (0.5f * (value + 1.0f) * (width - markerWidth - 2)), y + 2, markerWidth, height - 4);
 	}
 
 	@Override
 	public void onUpdate(int mouseX, int mouseY)
 	{
 		if (selected)
-			setValue(2.0f * (float) (mouseX - x) / (float) width - 1.0f);
+			setValue(2.0f * (mouseX - x) / width - 1.0f);
 	}
 
 	@Override
