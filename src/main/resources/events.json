@@ -5,7 +5,7 @@
 			{ "id": "FillyEvents", "mcp": "com.hepolite.fillycam.FillyEvents" }
 		],
 		"methods": [
-			{ "id": "getEyeHeight", "mcp": "getEyeHeight", "srg": "func_70047_e", "obf": "bn" }
+			{ "id": "getEyeHeight", "mcp": "getEyeHeight", "srg": "func_70047_e", "obf": "bo" }
 		]
 	},
 	"descriptors": [
