@@ -1,0 +1,26 @@
+{
+	"obfuscation": {
+		"classes": [
+			{ "id": "EntityPlayer", "mcp": "net.minecraft.entity.player.EntityPlayer", "obf": "zj" },
+			{ "id": "FillyEvents", "mcp": "com.hepolite.fillycam.FillyEvents" }
+		],
+		"methods": [
+			{ "id": "getEyeHeight", "mcp": "getEyeHeight", "srg": "func_70047_e", "obf": "bn" }
+		]
+	},
+	"descriptors": [
+		{ "id": "getEyeHeight", "owner": "${EntityPlayer}", "name": "${getEyeHeight}", "return": "FLOAT", "args": [] },
+		{ "id": "changeEyeHeight", "owner": "${FillyEvents}", "name": "changeEyeHeight" }
+	],
+	"events": [
+		{
+			"name": "changeEyeHeight",
+			"cancellable": true,
+			"injections": [{
+				"type": "RETURN",
+				"method": "${getEyeHeight}"
+			}],
+			"listeners": ["${changeEyeHeight}"]
+		}
+	]
+}
