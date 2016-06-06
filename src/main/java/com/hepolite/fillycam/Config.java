@@ -10,9 +10,9 @@ import com.mumfrey.liteloader.modconfig.Exposable;
 import com.mumfrey.liteloader.modconfig.ExposableOptions;
 
 @ExposableOptions(filename = "fillycam")
-public enum Config implements Exposable
+public class Config implements Exposable
 {
-	INSTANCE;
+	public static final Config INSTANCE = new Config();
 
 	// Core settings
 	public enum Setting

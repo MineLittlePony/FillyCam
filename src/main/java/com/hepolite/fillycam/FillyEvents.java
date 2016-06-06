@@ -12,7 +12,7 @@ public class FillyEvents
 	{
 
 		Config config = Config.INSTANCE;
-		if (!config.getBoolean(Setting.MOD_ENABLED) || e.getSource().isPlayerSleeping())
+		if (!config.getBoolean(Setting.MOD_ENABLED) || e.getSource().isPlayerSleeping() || e.getSource().isElytraFlying())
 		{
 			return;
 		}
