@@ -1,11 +1,11 @@
 {
 	"obfuscation": {
 		"classes": [
-			{ "id": "EntityPlayer", "mcp": "net.minecraft.entity.player.EntityPlayer", "obf": "zj" },
+			{ "id": "EntityPlayer", "mcp": "net.minecraft.entity.player.EntityPlayer", "obf": "zs" },
 			{ "id": "FillyEvents", "mcp": "com.hepolite.fillycam.FillyEvents" }
 		],
 		"methods": [
-			{ "id": "getEyeHeight", "mcp": "getEyeHeight", "srg": "func_70047_e", "obf": "bo" }
+			{ "id": "getEyeHeight", "mcp": "getEyeHeight", "srg": "func_70047_e", "obf": "bq" }
 		]
 	},
 	"descriptors": [
