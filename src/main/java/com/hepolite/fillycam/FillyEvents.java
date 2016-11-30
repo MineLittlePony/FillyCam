@@ -1,25 +1,25 @@
 package com.hepolite.fillycam;
 
 import com.hepolite.fillycam.Config.Setting;
-import com.mumfrey.liteloader.transformers.event.ReturnEventInfo;
+import com.mumfrey.liteloader.transformers.event.EventInfo;
+import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 
-import net.minecraft.entity.player.EntityPlayer;
+public class FillyEvents {
 
-public class FillyEvents
-{
+    private static Config config = Config.INSTANCE;
 
-	public static void changeEyeHeight(ReturnEventInfo<EntityPlayer, Float> e)
-	{
+    public static void onOrientCameraDistance(EventInfo<EntityRenderer> e, float arg1) {
+        if (config.getBoolean(Setting.MOD_ENABLED)) {
+            float distance = config.getFloat(Setting.CAMERA_OFFSET_DISTANCE);
+            GlStateManager.translate(0, 0, -distance);
+        }
+    }
 
-		Config config = Config.INSTANCE;
-		if (!config.getBoolean(Setting.MOD_ENABLED) || e.getSource().isPlayerSleeping() || e.getSource().isElytraFlying())
-		{
-			return;
-		}
-
-		float f = e.getReturnValueF();
-		f += config.getFloat(Setting.CAMERA_OFFSET_HEIGHT);
-
-		e.setReturnValue(f);
-	}
+    public static void onOrientCameraHeight(EventInfo<EntityRenderer> e, float arg1) {
+        if (config.getBoolean(Setting.MOD_ENABLED)) {
+            float height = config.getFloat(Setting.CAMERA_OFFSET_HEIGHT);
+            GlStateManager.translate(0, -height, 0);
+        }
+    }
 }

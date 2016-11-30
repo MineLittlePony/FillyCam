@@ -1,73 +1,50 @@
 package com.hepolite.fillycam;
 
-import java.io.File;
-
-import com.hepolite.fillycam.Config.Setting;
 import com.hepolite.fillycam.gui.GuiScreenFillyCam;
 import com.mumfrey.liteloader.Tickable;
 import com.mumfrey.liteloader.core.LiteLoader;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 
-public class LiteModFillyCam implements Tickable
-{
+import java.io.File;
 
-	private static LiteModFillyCam instance;
+public class LiteModFillyCam implements Tickable {
 
-	private KeyBinding keyGui = new KeyBinding("Opens the FillyCam GUI", 66, "FillyCam");
+    private static LiteModFillyCam instance;
 
-	@Override
-	public String getName()
-	{
-		return ModInfo.NAME;
-	}
+    private KeyBinding keyGui = new KeyBinding("Opens the FillyCam GUI", 66, "FillyCam");
 
-	@Override
-	public String getVersion()
-	{
-		return ModInfo.VERSION;
-	}
+    @Override
+    public String getName() {
+        return ModInfo.NAME;
+    }
 
-	public static LiteModFillyCam getInstance()
-	{
-		return instance;
-	}
+    @Override
+    public String getVersion() {
+        return ModInfo.VERSION;
+    }
 
-	@Override
-	public void init(File configPath)
-	{
-		instance = this;
-		LiteLoader.getInstance().registerExposable(Config.INSTANCE, null);
-		LiteLoader.getInput().registerKeyBinding(this.keyGui);
-	}
+    public static LiteModFillyCam getInstance() {
+        return instance;
+    }
 
-	@Override
-	public void onTick(Minecraft mc, float partialTicks, boolean inGame, boolean clock)
-	{
-		Config config = Config.INSTANCE;
-		if (this.keyGui.isPressed())
-		{
-			mc.displayGuiScreen(new GuiScreenFillyCam());
-		}
+    @Override
+    public void init(File configPath) {
+        instance = this;
+        LiteLoader.getInstance().registerExposable(Config.INSTANCE, null);
+        LiteLoader.getInput().registerKeyBinding(this.keyGui);
+    }
 
-		if (!config.getBoolean(Setting.MOD_ENABLED))
-		{
-			this.setCameraDistance(4.0F);
-		} else
-		{
-			this.setCameraDistance(4.0F + config.getFloat(Setting.CAMERA_OFFSET_DISTANCE));
-		}
-	}
+    @Override
+    public void onTick(Minecraft mc, float partialTicks, boolean inGame, boolean clock) {
+        if (this.keyGui.isPressed()) {
+            mc.displayGuiScreen(new GuiScreenFillyCam());
+        }
+    }
 
-	public void setCameraDistance(float distance)
-	{
-		FillyFields.thirdPersonDistance.set(Minecraft.getMinecraft().entityRenderer, distance);
-	}
 
-	@Override
-	public void upgradeSettings(String version, File configPath, File oldConfigPath)
-	{
-	}
+    @Override
+    public void upgradeSettings(String version, File configPath, File oldConfigPath) {
+    }
 
 }
