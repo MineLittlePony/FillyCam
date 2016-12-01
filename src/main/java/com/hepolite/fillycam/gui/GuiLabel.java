@@ -1,13 +1,12 @@
 package com.hepolite.fillycam.gui;
 
-import com.hepolite.fillycam.ModInfo;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiLabel extends GuiElement {
     private String name = "Unnamed Label";
     private int color = 16777215;
 
-    private ResourceLocation texture = new ResourceLocation(ModInfo.TEXTURE_PATH, "textures/guis/label.png");
+    private ResourceLocation texture = new ResourceLocation(TEXTURE_PATH, "textures/guis/label.png");
 
     public GuiLabel(int x, int y, int width, int height, String name, byte colorRed, byte colorGreen, byte colorBlue) {
         super(x, y, width, height);

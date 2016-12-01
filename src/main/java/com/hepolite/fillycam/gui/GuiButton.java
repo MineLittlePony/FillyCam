@@ -1,6 +1,5 @@
 package com.hepolite.fillycam.gui;
 
-import com.hepolite.fillycam.ModInfo;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.LinkedList;
@@ -64,10 +63,10 @@ public abstract class GuiButton extends GuiElement {
         public GuiButtonRadiobox(int x, int y, int width, int height) {
             super(x, y, width, height);
 
-            textureActive = new ResourceLocation(ModInfo.TEXTURE_PATH, "textures/guis/button_radiobox_active.png");
-            textureInactive = new ResourceLocation(ModInfo.TEXTURE_PATH, "textures/guis/button_radiobox_inactive.png");
-            textureHoverActive = new ResourceLocation(ModInfo.TEXTURE_PATH, "textures/guis/button_radiobox_hover_active.png");
-            textureHoverInactive = new ResourceLocation(ModInfo.TEXTURE_PATH, "textures/guis/button_radiobox_Hover_inactive.png");
+            textureActive = new ResourceLocation(TEXTURE_PATH, "textures/guis/button_radiobox_active.png");
+            textureInactive = new ResourceLocation(TEXTURE_PATH, "textures/guis/button_radiobox_inactive.png");
+            textureHoverActive = new ResourceLocation(TEXTURE_PATH, "textures/guis/button_radiobox_hover_active.png");
+            textureHoverInactive = new ResourceLocation(TEXTURE_PATH, "textures/guis/button_radiobox_Hover_inactive.png");
         }
 
         public void addButtonToGroup(GuiButtonRadiobox otherButton) {
@@ -102,10 +101,10 @@ public abstract class GuiButton extends GuiElement {
         protected GuiButtonCheckbox(int x, int y, int width, int height) {
             super(x, y, width, height);
 
-            textureActive = new ResourceLocation(ModInfo.TEXTURE_PATH, "textures/guis/button_checkbox_active.png");
-            textureInactive = new ResourceLocation(ModInfo.TEXTURE_PATH, "textures/guis/button_checkbox_inactive.png");
-            textureHoverActive = new ResourceLocation(ModInfo.TEXTURE_PATH, "textures/guis/button_checkbox_hover_active.png");
-            textureHoverInactive = new ResourceLocation(ModInfo.TEXTURE_PATH, "textures/guis/button_checkbox_hover_inactive.png");
+            textureActive = new ResourceLocation(TEXTURE_PATH, "textures/guis/button_checkbox_active.png");
+            textureInactive = new ResourceLocation(TEXTURE_PATH, "textures/guis/button_checkbox_inactive.png");
+            textureHoverActive = new ResourceLocation(TEXTURE_PATH, "textures/guis/button_checkbox_hover_active.png");
+            textureHoverInactive = new ResourceLocation(TEXTURE_PATH, "textures/guis/button_checkbox_hover_inactive.png");
         }
 
         @Override

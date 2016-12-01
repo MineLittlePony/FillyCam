@@ -10,27 +10,23 @@ import java.io.File;
 
 public class LiteModFillyCam implements Tickable {
 
-    private static LiteModFillyCam instance;
+    private static final String NAME = "FillyCam";
+    private static final String VERSION = "@VERSION@";
 
     private KeyBinding keyGui = new KeyBinding("Opens the FillyCam GUI", 66, "FillyCam");
 
     @Override
     public String getName() {
-        return ModInfo.NAME;
+        return NAME;
     }
 
     @Override
     public String getVersion() {
-        return ModInfo.VERSION;
-    }
-
-    public static LiteModFillyCam getInstance() {
-        return instance;
+        return VERSION;
     }
 
     @Override
     public void init(File configPath) {
-        instance = this;
         LiteLoader.getInstance().registerExposable(Config.INSTANCE, null);
         LiteLoader.getInput().registerKeyBinding(this.keyGui);
     }

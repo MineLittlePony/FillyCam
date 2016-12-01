@@ -5,6 +5,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.util.ResourceLocation;
 
 public abstract class GuiElement {
+    protected static final String TEXTURE_PATH = "fillycam";
     // Control variables
     protected int x = 0;
     protected int y = 0;

@@ -1,6 +1,5 @@
 package com.hepolite.fillycam.gui;
 
-import com.hepolite.fillycam.ModInfo;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiScrollbar extends GuiElement {
@@ -9,8 +8,8 @@ public class GuiScrollbar extends GuiElement {
 
     private int markerWidth = 0;
 
-    protected ResourceLocation textureBackground = new ResourceLocation(ModInfo.TEXTURE_PATH, "textures/guis/label.png");
-    protected ResourceLocation textureMarker = new ResourceLocation(ModInfo.TEXTURE_PATH, "textures/guis/scrollbar_marker.png");
+    private ResourceLocation textureBackground = new ResourceLocation(TEXTURE_PATH, "textures/guis/label.png");
+    private ResourceLocation textureMarker = new ResourceLocation(TEXTURE_PATH, "textures/guis/scrollbar_marker.png");
 
     public GuiScrollbar(int x, int y, int width, int height, int markerWidth) {
         super(x, y, width, height);

@@ -1,20 +1,23 @@
 {
 	"obfuscation": {
 		"classes": [
+			{ "id": "EntityPlayer", "mcp": "net.minecraft.entity.player.EntityPlayer", "obf": "aax"},
 			{ "id": "EntityRenderer", "mcp": "net.minecraft.client.renderer.EntityRenderer", "obf": "bqc"},
 			{ "id": "GlStateManager", "mcp": "net.minecraft.client.renderer.GlStateManager", "obf": "bqe" },
 			{ "id": "FillyEvents", "mcp": "com.hepolite.fillycam.FillyEvents" }
 		],
 		"methods": [
-            { "id": "orientCamera", "mcp": "orientCamera", "srg": "func_78467_g", "obf": "f" },
+			{ "id": "getEyeHeight", "mcp": "getEyeHeight", "srg": "func_70047_e", "obf": "bq" },
+			{ "id": "orientCamera", "mcp": "orientCamera", "srg": "func_78467_g", "obf": "f" },
 			{ "id": "translateF", "mcp": "translate", "srg": "func_189109_b", "obf": "c" }
 		]
 	},
 	"descriptors": [
+		{ "id": "getEyeHeight", "owner": "${EntityPlayer}", "name": "${getEyeHeight}", "return": "FLOAT", "args": [] },
 		{ "id": "orientCamera", "owner": "${EntityRenderer}", "name": "${orientCamera}", "return": "VOID", "args": [ "FLOAT" ] },
 		{ "id": "translateF", "owner": "${GlStateManager}", "name": "${translateF}", "return": "VOID","args": [ "FLOAT", "FLOAT", "FLOAT" ] },
 		{ "id": "onOrientCameraDistance", "owner": "${FillyEvents}", "name": "onOrientCameraDistance"},
-		{ "id": "onOrientCameraHeight", "owner": "${FillyEvents}", "name": "onOrientCameraHeight"}
+		{ "id": "changeEyeHeight", "owner": "${FillyEvents}", "name": "onOrientCameraHeight"}
 	],
 	"events": [
 		{
@@ -28,12 +31,13 @@
 			"listeners": ["${onOrientCameraDistance}"]
 		},
 		{
-			"name": "onOrientCameraHeight",
+			"name": "changeEyeHeight",
+			"cancellable": true,
 			"injections": [{
 				"type": "RETURN",
-				"method": "${orientCamera}"
+				"method": "${getEyeHeight}"
 			}],
-			"listeners": ["${onOrientCameraHeight}"]
+			"listeners": ["${changeEyeHeight}"]
 		}
 	]
 }

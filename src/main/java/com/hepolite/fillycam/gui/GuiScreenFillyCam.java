@@ -15,38 +15,29 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class GuiScreenFillyCam extends GuiScreen {
-    // Control variables
-    private int x = 0;
-    private int y = 0;
+
+    private static final float HEIGHT_FACTOR = 1.43f;
+    private static final float DISTANCE_FACTOR = 3.5f;
 
     private List<GuiElement> elements = new LinkedList<GuiElement>();
 
     // Core gui elements
-    private GuiButton buttonEnableMod = null;
-    private GuiLabel buttonEnableModLabel = null;
+    private GuiButton buttonEnableMod;
 
-    private GuiScrollbar scrollbarCameraHeightOffset = null;
-    private GuiLabel scrollbarCameraHeightOffsetLabel = null;
-    private GuiLabel scrollbarCameraHeightOffsetInfo = null;
-    private GuiButton scrollbarCameraHeightOffsetReset = null;
+    private GuiScrollbar scrollbarCameraHeightOffset;
+    private GuiLabel scrollbarCameraHeightOffsetInfo;
+    private GuiButton scrollbarCameraHeightOffsetReset;
 
-    private GuiScrollbar scrollbarCameraDistanceOffset = null;
-    private GuiLabel scrollbarCameraDistanceOffsetLabel = null;
-    private GuiLabel scrollbarCameraDistanceOffsetInfo = null;
-    private GuiButton scrollbarCameraDistanceOffsetReset = null;
+    private GuiScrollbar scrollbarCameraDistanceOffset;
+    private GuiLabel scrollbarCameraDistanceOffsetInfo;
+    private GuiButton scrollbarCameraDistanceOffsetReset;
 
-    private GuiButtonRadiobox buttonPresetDefault = null;
-    private GuiLabel buttonPresetDefaultLabel = null;
-    private GuiButtonRadiobox buttonPresetAlicorn = null;
-    private GuiLabel buttonPresetAlicornLabel = null;
-    private GuiButtonRadiobox buttonPresetStallion = null;
-    private GuiLabel buttonPresetStallionLabel = null;
-    private GuiButtonRadiobox buttonPresetMare = null;
-    private GuiLabel buttonPresetMareLabel = null;
-    private GuiButtonRadiobox buttonPresetFilly = null;
-    private GuiLabel buttonPresetFillyLabel = null;
-    private GuiButtonRadiobox buttonPresetCustom = null;
-    private GuiLabel buttonPresetCustomLabel = null;
+    private GuiButtonRadiobox buttonPresetDefault;
+    private GuiButtonRadiobox buttonPresetAlicorn;
+    private GuiButtonRadiobox buttonPresetStallion;
+    private GuiButtonRadiobox buttonPresetMare;
+    private GuiButtonRadiobox buttonPresetFilly;
+    private GuiButtonRadiobox buttonPresetCustom;
 
     // ///////////////////////////////////////////////////////////////////////////////////////
     // CORE FUNCTIONALITY // CORE FUNCTIONALITY // CORE FUNCTIONALITY // CORE FUNCTIONALITY //
@@ -57,20 +48,20 @@ public class GuiScreenFillyCam extends GuiScreen {
         Keyboard.enableRepeatEvents(true);
 
         // Position the gui near the middle of the screen, with size 160 * 200
-        x = width / 2 - 126;
-        y = height / 2 - 116;
+        int x = width / 2 - 126;
+        int y = height / 2 - 116;
 
         // Build up the gui
         elements.clear();
         int rowX = x + 5;
 
-        buttonEnableModLabel = new GuiLabel(rowX, y, 120, 16, "Enable FillyCam", (byte) 255, (byte) 255, (byte) 255);
+        GuiLabel buttonEnableModLabel = new GuiLabel(rowX, y, 120, 16, "Enable FillyCam", (byte) 255, (byte) 255, (byte) 255);
         buttonEnableMod = new GuiButtonCheckbox(rowX + 124, y, 16, 16);
         addElement(buttonEnableMod);
         addElement(buttonEnableModLabel);
         buttonEnableMod.setActive(Config.INSTANCE.getBoolean(Setting.MOD_ENABLED));
 
-        scrollbarCameraHeightOffsetLabel = new GuiLabel(rowX, y + 39, 120, 16, "Camera Height", (byte) 255, (byte) 255, (byte) 255);
+        GuiLabel scrollbarCameraHeightOffsetLabel = new GuiLabel(rowX, y + 39, 120, 16, "Camera Height", (byte) 255, (byte) 255, (byte) 255);
         scrollbarCameraHeightOffset = new GuiScrollbar(rowX + 124, y + 30, 120, 16, 6);
         scrollbarCameraHeightOffsetInfo = new GuiLabel(rowX + 124, y + 48, 102, 16, "Height: ???", (byte) 255, (byte) 255, (byte) 255);
         scrollbarCameraHeightOffsetReset = new GuiButtonRadiobox(rowX + 228, y + 48, 16, 16);
@@ -78,10 +69,10 @@ public class GuiScreenFillyCam extends GuiScreen {
         addElement(scrollbarCameraHeightOffsetLabel);
         addElement(scrollbarCameraHeightOffsetInfo);
         addElement(scrollbarCameraHeightOffsetReset);
-        scrollbarCameraHeightOffset.setValue(Config.INSTANCE.getFloat(Setting.CAMERA_OFFSET_HEIGHT) / 1.55f);
+        scrollbarCameraHeightOffset.setValue(Config.INSTANCE.getFloat(Setting.CAMERA_OFFSET_HEIGHT) / HEIGHT_FACTOR);
         scrollbarCameraHeightOffsetReset.setActive(false);
 
-        scrollbarCameraDistanceOffsetLabel = new GuiLabel(rowX, y + 77, 120, 16, "Camera Distance", (byte) 255, (byte) 255, (byte) 255);
+        GuiLabel scrollbarCameraDistanceOffsetLabel = new GuiLabel(rowX, y + 77, 120, 16, "Camera Distance", (byte) 255, (byte) 255, (byte) 255);
         scrollbarCameraDistanceOffset = new GuiScrollbar(rowX + 124, y + 68, 120, 16, 6);
         scrollbarCameraDistanceOffsetInfo = new GuiLabel(rowX + 124, y + 86, 102, 16, "Distance: ???", (byte) 255, (byte) 255, (byte) 255);
         scrollbarCameraDistanceOffsetReset = new GuiButtonRadiobox(rowX + 228, y + 86, 16, 16);
@@ -89,21 +80,21 @@ public class GuiScreenFillyCam extends GuiScreen {
         addElement(scrollbarCameraDistanceOffsetLabel);
         addElement(scrollbarCameraDistanceOffsetInfo);
         addElement(scrollbarCameraDistanceOffsetReset);
-        scrollbarCameraDistanceOffset.setValue(Config.INSTANCE.getFloat(Setting.CAMERA_OFFSET_DISTANCE) / 3.5f);
+        scrollbarCameraDistanceOffset.setValue(Config.INSTANCE.getFloat(Setting.CAMERA_OFFSET_DISTANCE) / DISTANCE_FACTOR);
         scrollbarCameraDistanceOffsetReset.setActive(false);
 
         buttonPresetDefault = new GuiButtonRadiobox(rowX + 124, y + 120, 16, 16);
-        buttonPresetDefaultLabel = new GuiLabel(rowX, y + 120, 120, 16, "Default Preset", (byte) 255, (byte) 255, (byte) 255);
+        GuiLabel buttonPresetDefaultLabel = new GuiLabel(rowX, y + 120, 120, 16, "Default Preset", (byte) 255, (byte) 255, (byte) 255);
         buttonPresetAlicorn = new GuiButtonRadiobox(rowX + 124, y + 139, 16, 16);
-        buttonPresetAlicornLabel = new GuiLabel(rowX, y + 139, 120, 16, "Alicorn Preset", (byte) 255, (byte) 255, (byte) 255);
+        GuiLabel buttonPresetAlicornLabel = new GuiLabel(rowX, y + 139, 120, 16, "Alicorn Preset", (byte) 255, (byte) 255, (byte) 255);
         buttonPresetStallion = new GuiButtonRadiobox(rowX + 124, y + 158, 16, 16);
-        buttonPresetStallionLabel = new GuiLabel(rowX, y + 158, 120, 16, "Stallion Preset", (byte) 255, (byte) 255, (byte) 255);
+        GuiLabel buttonPresetStallionLabel = new GuiLabel(rowX, y + 158, 120, 16, "Stallion Preset", (byte) 255, (byte) 255, (byte) 255);
         buttonPresetMare = new GuiButtonRadiobox(rowX + 124, y + 177, 16, 16);
-        buttonPresetMareLabel = new GuiLabel(rowX, y + 177, 120, 16, "Mare Preset", (byte) 255, (byte) 255, (byte) 255);
+        GuiLabel buttonPresetMareLabel = new GuiLabel(rowX, y + 177, 120, 16, "Mare Preset", (byte) 255, (byte) 255, (byte) 255);
         buttonPresetFilly = new GuiButtonRadiobox(rowX + 124, y + 196, 16, 16);
-        buttonPresetFillyLabel = new GuiLabel(rowX, y + 196, 120, 16, "Filly Preset", (byte) 255, (byte) 255, (byte) 255);
+        GuiLabel buttonPresetFillyLabel = new GuiLabel(rowX, y + 196, 120, 16, "Filly Preset", (byte) 255, (byte) 255, (byte) 255);
         buttonPresetCustom = new GuiButtonRadiobox(rowX + 124, y + 215, 16, 16);
-        buttonPresetCustomLabel = new GuiLabel(rowX, y + 215, 120, 16, "Custom Settings", (byte) 255, (byte) 255, (byte) 255);
+        GuiLabel buttonPresetCustomLabel = new GuiLabel(rowX, y + 215, 120, 16, "Custom Settings", (byte) 255, (byte) 255, (byte) 255);
         addElement(buttonPresetDefault);
         addElement(buttonPresetDefaultLabel);
         addElement(buttonPresetAlicorn);
@@ -174,8 +165,8 @@ public class GuiScreenFillyCam extends GuiScreen {
 
         // Actually set the config values
         Config.INSTANCE.set(Setting.MOD_ENABLED, buttonEnableMod.isActive());
-        Config.INSTANCE.set(Setting.CAMERA_OFFSET_HEIGHT, 1.55f * scrollbarCameraHeightOffset.getValue());
-        Config.INSTANCE.set(Setting.CAMERA_OFFSET_DISTANCE, 3.5f * scrollbarCameraDistanceOffset.getValue());
+        Config.INSTANCE.set(Setting.CAMERA_OFFSET_HEIGHT, HEIGHT_FACTOR * scrollbarCameraHeightOffset.getValue());
+        Config.INSTANCE.set(Setting.CAMERA_OFFSET_DISTANCE, DISTANCE_FACTOR * scrollbarCameraDistanceOffset.getValue());
 
         // Update visual information
         scrollbarCameraHeightOffsetInfo.setName(String.format("Height: %.2fm", 1.62f + Config.INSTANCE.getFloat(Setting.CAMERA_OFFSET_HEIGHT)));
@@ -219,7 +210,7 @@ public class GuiScreenFillyCam extends GuiScreen {
     /**
      * Adds a new element to the menu
      */
-    public void addElement(GuiElement element) {
+    private void addElement(GuiElement element) {
         if (element != null)
             elements.add(element);
     }
